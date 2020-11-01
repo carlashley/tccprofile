@@ -13,6 +13,10 @@ Scans the system and current user `Library/Application Support/com.apple.TCC/TCC
 
 Generated profiles are only suitable for deploying to macOS 11+ systems - the `Allowed` value used prior to macOS 11 has been deprecated by Apple and is not supported in this utility. Deploying profiles to versions of macOS older than macOS 11 will likely result in disappointment.
 
+## What it does not do
+- Target specific applications that have not been added to the `Security & Privacy` preferences pane by the user.
+- Implement the ability to `Deny` the `Camera` and `Microphone` services for specific apps.
+
 ## Usage
 To properly scan the TCC databases, full disk access may need to be provided to the relevant terminal application (for example, Terminal, iTerm, etc).
 
