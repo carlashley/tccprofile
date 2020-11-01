@@ -32,8 +32,8 @@ optional arguments:
   --remove-profile      Allow the profile to be removed.
   --services [services] [[services] ...]
                         Services to include in profile if found in TCC
-                        databases. Uses the service name as the argument. For
-                        example 'Accessibility AppleEvents'
+                        databases. Uses the service names as per Apple's PPPCP
+                        payloads.
   --list-services       Lists supported services found in the TCC database.
   -v, --version         Display version number and license and exit.
-  ```
+```

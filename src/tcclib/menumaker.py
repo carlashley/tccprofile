@@ -67,7 +67,7 @@ def arg_parser():
                                      'required': False,
                                      'choices': [_v for _k, _v in KTCC_MAP.items()],
                                      'help': ('Services to include in profile if found in TCC databases. \
-                                              Uses the service name as the argument. For example \'Accessibility AppleEvents\'')}},
+                                              Uses the service names as per Apple\'s PPPCP payloads.')}},
              'list_services': {'args': ['--list-services'],
                                'kwargs': {'action': 'store_true',
                                           'dest': 'list_services',
