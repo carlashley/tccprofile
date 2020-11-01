@@ -5,6 +5,8 @@ Scan the TCC databases and generate a PPPCP profile.
 `git clone https://github.com/carlashley/tccprofile`
 
 ## Usage
+To properly scan the TCC databases, full disk access may need to be provided to the relevant terminal application (for example, Terminal, iTerm, etc).
+
 ```
 usage: tccprofile [-h] [--scan] [-o [path]] [--description [description]]
                   [--display-name [display-name]] [--identifier [identifier]]
