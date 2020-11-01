@@ -58,7 +58,7 @@ def arg_parser():
                                    'kwargs': {'action': 'store_true',
                                               'dest': 'profile_removable',
                                               'required': False,
-                                              'help': ('Allow the profile to be removed.')}},
+                                              'help': ('Allow the profile to be removed. Default is disallow removal.')}},
              'services': {'args': ['--services'],
                           'kwargs': {'nargs': '+',
                                      'type': str,

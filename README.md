@@ -43,7 +43,8 @@ optional arguments:
                         example: 'org.example.foo'.
   --organization [organization]
                         Payload organization.
-  --remove-profile      Allow the profile to be removed.
+  --remove-profile      Allow the profile to be removed. Default is disallow
+                        removal.
   --services [services] [[services] ...]
                         Services to include in profile if found in TCC
                         databases. Uses the service names as per Apple's PPPCP
