@@ -1,12 +1,14 @@
 """Main"""
 
 try:
+    from tcclib import common
     from tcclib import menumaker
     from tcclib import payloadobj
     from tcclib import plist
     from tcclib import tccdbscan
     from tcclib import vers
 except ImportError:
+    from .tcclib import common
     from .tcclib import menumaker
     from .tcclib import payloadobj
     from .tcclib import plist
@@ -52,6 +54,10 @@ def main():
             _services = tccdbscan.user_managed(args.services)
         else:
             _services = tccdbscan.user_managed()
+
+        # No services == no profile.
+        if not _services:
+            common.errmsg('No services found. Exiting.')
 
         if _kwargs:
             _payload_content = payloadobj.PayloadContentDict(_services, **_kwargs).payload_content
