@@ -150,3 +150,76 @@ drwx------@  7 jappleseed  staff   224B  1 Nov 20:19 .
 drwxr-xr-x+ 50 jappleseed  staff   1.6K  1 Nov 16:59 ..
 -rw-r--r--@  1 jappleseed  staff   2.3K  1 Nov 20:21 AllServices.mobileconfig
 ```
+### Override default values
+```
+[jappleseed@infiniteloop]:tccprofile # ./tccprofile --scan --services AppleEvents \
+    --description "Full PPPCP configuration for macOS 11" \
+    --display-name "PPPCP Config for macOS 11" \
+    --identifier org.example.profile.pppcp.macos11 \
+    --organization "Bag End Computing"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadDescription</key>
+			<string>PPPCP profile</string>
+			<key>PayloadDisplayName</key>
+			<string>PPPCP profile</string>
+			<key>PayloadIdentifier</key>
+			<string>org.example.profile.pppcp.macos11.FB279A88-1C2E-11EB-A6A0-ACDE48001122</string>
+			<key>PayloadOrganization</key>
+			<string>Bag End Computing</string>
+			<key>PayloadType</key>
+			<string>com.apple.TCC.configuration-profile-policy</string>
+			<key>PayloadUUID</key>
+			<string>FB279A88-1C2E-11EB-A6A0-ACDE48001122</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>Services</key>
+			<dict>
+				<key>AppleEvents</key>
+				<array>
+					<dict>
+						<key>AEReceiverCodeRequirement</key>
+						<string>identifier "com.apple.systemevents" and anchor apple</string>
+						<key>AEReceiverIdentifier</key>
+						<string>com.apple.systemevents</string>
+						<key>AEReceiverIdentifierType</key>
+						<string>bundleID</string>
+						<key>Authorization</key>
+						<string>Allow</string>
+						<key>CodeRequirement</key>
+						<string>identifier "com.vmware.fusionApplicationsMenu" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = EG7KH642X6</string>
+						<key>Identifier</key>
+						<string>com.vmware.fusionApplicationsMenu</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+			</dict>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Full PPPCP configuration for macOS 11</string>
+	<key>PayloadDisplayName</key>
+	<string>PPPCP Config for macOS 11</string>
+	<key>PayloadIdentifier</key>
+	<string>org.example.profile.pppcp.macos11</string>
+	<key>PayloadOrganization</key>
+	<string>Bag End Computing</string>
+	<key>PayloadRemovalDisallowed</key>
+	<true/>
+	<key>PayloadScope</key>
+	<string>system</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>FB279D1C-1C2E-11EB-A6A0-ACDE48001122</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>
+```
