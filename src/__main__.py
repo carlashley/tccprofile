@@ -57,7 +57,7 @@ def main():
 
         # No services == no profile.
         if not _services:
-            common.errmsg('No services found. Exiting.')
+            common.errmsg('No matching services found. List available services with \'--list-services\' argument. Exiting.')
 
         if _kwargs:
             _payload_content = payloadobj.PayloadContentDict(_services, **_kwargs).payload_content

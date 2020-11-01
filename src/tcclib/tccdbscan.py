@@ -4,6 +4,7 @@ import pathlib
 
 from sys import exit
 
+from .common import errmsg
 from .conf import KTCC_MAP
 from .sqlitedb import SQLiteDB
 from .payloadobj import ServicesDict
@@ -54,8 +55,11 @@ def list_services():
     result = list(_services)
     result.sort()
 
-    print('Supported services found in TCC databases:')
-    for _r in result:
-        print('  {}'.format(_r))
+    if result:
+        print('Supported services found in TCC databases:')
+        for _r in result:
+            print('  {}'.format(_r))
+    else:
+        errmsg('No supported services found in TCC databases.')
 
     exit()
