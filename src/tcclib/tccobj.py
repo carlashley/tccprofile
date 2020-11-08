@@ -8,9 +8,11 @@ from .conf import KTCC_MAP, KTCC_ALLOW_STD_USER_PAYLOADS
 
 class TCCApplication:
     """TCC Application (local file paths) object."""
-    _ATTRS = ['client',
-              'client_type',
-              'csreq',
+    _ATTRS = ['csreq',
+              'identifier',
+              'identifier_type',
+              'is_signed',
+              'name',
               'path']
 
     def __init__(self, **kwargs):
@@ -18,7 +20,8 @@ class TCCApplication:
             raise AttributeError('{} attributes required.'.format(self.__class__._ATTRS))
 
         for _k, _v in kwargs.items():
-            setattr(self, _k, _v)
+            if _k in self.__class__._ATTRS:  # Only include attributes that are necessary
+                setattr(self, _k, _v)
 
     def __hash__(self):
         if not isinstance(self, self.__class__):
@@ -47,13 +50,13 @@ class TCCApplication:
 class TCCDBEntry:
     """TCC Database object."""
     _ATTRS = ['allowed',
-              'client',
-              'client_type',
+              'identifier',
+              'identifier_type',
               'csreq',
               'flags',
-              'indirect_object_code_identity',
-              'indirect_object_identifier',
-              'indirect_object_identifier_type',
+              'apple_events_csreq',
+              'apple_events_identifier',
+              'apple_events_identifier_type',
               'last_modified',
               'policy_id',
               'prompt_count',
@@ -65,16 +68,16 @@ class TCCDBEntry:
 
         # Determine kTCC service type and if this is an AppleEvent entry.
         _tcc_service_type = KTCC_MAP.get(kwargs['service'], None)
-        _is_ae_event = not kwargs.get('indirect_object_identifier', 'UNUSED') == 'UNUSED'
+        _is_ae_event = not kwargs.get('apple_events_identifier', 'UNUSED') == 'UNUSED'
 
         for _k, _v in kwargs.items():
             # NOTE:In the SQL, the 'client_type' value of '1' represents
             # is a 'path' identifier type, while '0' indicates a 'bundleID'.
-            if _k == 'client_type':
+            if _k == 'identifier_type':
                 _v = 'path' if _v == 1 else 'bundleID'
 
             # As above for 'client_type'.
-            if _k == 'indirect_object_identifier_type':
+            if _k == 'apple_events_identifier_type':
                 if _is_ae_event:
                     _v = 'path' if _v == 1 else 'bundleID'
                 else:
@@ -98,14 +101,14 @@ class TCCDBEntry:
                 if _v:
                     _v = csreq(str.encode(_v.hex()))
 
-            if _k == 'indirect_object_code_identity':
+            if _k == 'apple_events_csreq':
                 if _v and _is_ae_event:
                     _v = csreq(str.encode(_v.hex()))
                 else:
                     _v = None
 
             # If this isn't an AppleEvent, value is None
-            if _k == 'indirect_object_identifier':
+            if _k == 'apple_events_identifier':
                 if not _is_ae_event:
                     _v = None
 

@@ -7,18 +7,18 @@ _NOW = datetime.now().strftime('%Y-%m-%d-%H%M%S')
 
 
 class ServicesDict:
-    _REQ_ATTRS = ['client',
-                  'client_type',
+    _REQ_ATTRS = ['identifier',
+                  'identifier_type',
                   'csreq',
                   'allowed']
 
-    _TCC_SERVICE_PAYLOAD_MAP = {'client': 'Identifier',
-                                'client_type': 'IdentifierType',
+    _TCC_SERVICE_PAYLOAD_MAP = {'identifier': 'Identifier',
+                                'identifier_type': 'IdentifierType',
                                 'csreq': 'CodeRequirement',
                                 'allowed': 'Authorization',
-                                'indirect_object_identifier': 'AEReceiverIdentifier',
-                                'indirect_object_identifier_type': 'AEReceiverIdentifierType',
-                                'indirect_object_code_identity': 'AEReceiverCodeRequirement'}
+                                'apple_events_identifier': 'AEReceiverIdentifier',
+                                'apple_events_identifier_type': 'AEReceiverIdentifierType',
+                                'apple_events_csreq': 'AEReceiverCodeRequirement'}
 
     def __init__(self, **kwargs):
         """Services Dict"""
