@@ -1,6 +1,7 @@
 # macOS Fluff
 .DS_Store
 ._*
+*.mobileconfig
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
