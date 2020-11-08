@@ -1,0 +1,12 @@
+SystemPolicyDownloadsFolder:
+  - /Applications/zoom.us.app:
+    - csreq: identifier "us.zoom.xos" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = BJ4HAAB9B3
+    - identifier: us.zoom.xos
+    - identifier_type: bundleID
+    - authorization: Allow
+ScreenCapture:
+  - /Applications/zoom.us.app:
+    - csreq: identifier "us.zoom.xos" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = BJ4HAAB9B3
+    - identifier: us.zoom.xos
+    - identifier_type: bundleID
+    - authorization: AllowStandardUserToSetSystemService

@@ -1,0 +1,12 @@
+SystemPolicyAllFiles:
+  - /System/Applications/Utilities/Terminal.app:
+    - csreq: identifier "com.apple.Terminal" and anchor apple
+    - identifier: com.apple.Terminal
+    - identifier_type: bundleID
+    - authorization: Allow
+ScreenCapture:
+  - /System/Applications/Utilities/Terminal.app:
+    - csreq: identifier "com.apple.Terminal" and anchor apple
+    - identifier: com.apple.Terminal
+    - identifier_type: bundleID
+    - authorization: AllowStandardUserToSetSystemService

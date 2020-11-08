@@ -1,0 +1,12 @@
+SystemPolicyAllFiles:
+  - /Applications/Google Chrome.app:
+    - csreq: (identifier "com.google.Chrome" or identifier "com.google.Chrome.beta" or identifier "com.google.Chrome.dev" or identifier "com.google.Chrome.canary") and certificate leaf = H"c9a99324ca3fcb23dbcc36bd5fd4f9753305130a"
+    - identifier: com.google.Chrome
+    - identifier_type: bundleID
+    - authorization: Allow
+ScreenCapture:
+  - /Applications/Google Chrome.app:
+    - csreq: (identifier "com.google.Chrome" or identifier "com.google.Chrome.beta" or identifier "com.google.Chrome.dev" or identifier "com.google.Chrome.canary") and certificate leaf = H"c9a99324ca3fcb23dbcc36bd5fd4f9753305130a"
+    - identifier: com.google.Chrome
+    - identifier_type: bundleID
+    - authorization: AllowStandardUserToSetSystemService
