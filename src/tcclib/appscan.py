@@ -36,10 +36,42 @@ def _applications():
     for _a in _app_dirs:
         _app = {'path': _a}
         _codesig = requirements(_a)
-        _app.update(_codesig)
+        _app.update(_codesig)  # Updates with results from 'requirements()' dict
 
         _bn = PurePath(_a).name
         _app['name'] = str(_bn.replace(str(PurePath(_bn).suffix), ''))
+
+        if _app.get('is_signed', False):
+            _obj = TCCApplication(**_app)
+            result.add(_obj)
+
+    return result
+
+
+def _binaries():
+    """System binaries"""
+    result = set()
+    _binaries = set()
+    _paths = ['/usr/local/bin',
+              '/usr/bin',
+              '/bin',
+              '/usr/sbin',
+              '/sbin',
+              '/usr/libexec/',
+              '/Library/Apple/usr/bin']
+
+    for _p in _paths:
+        _bins = [Path(_b) for _b in Path(_p).glob('*')]
+
+        for _b in _bins:
+            if not _b.is_symlink() and _b.is_file():
+                _binaries.add(_b)
+
+    for _b in _binaries:
+        _app = {'path': _b}
+        _codesig = requirements(_b)
+        _app.update(_codesig)  # Updates with results from 'requirements()' dict
+        _app['name'] = str(_b)
 
         if _app.get('is_signed', False):
             _obj = TCCApplication(**_app)
@@ -70,7 +102,7 @@ def _system_profiler_apps():
                 _app['name'] = _app['_name']
                 del _app['_name']
 
-                _app.update(_codesig)
+                _app.update(_codesig)  # Updates with results from 'requirements()' dict
 
                 if _app.get('is_signed', False):
                     _obj = TCCApplication(**_app)
@@ -83,6 +115,10 @@ def installed():
     """Installed applications."""
     result = set()
 
-    result = _system_profiler_apps().union(_applications())
+    _profiler_apps = _system_profiler_apps()
+    _local_apps = _applications()
+    _bins = _binaries()
+
+    result = _profiler_apps.union(_local_apps.union(_bins))
 
     return result
