@@ -1,6 +1,6 @@
 SystemPolicyAllFiles:
-  - /usr/bin/defaults:
-    - csreq: identifier "com.apple.defaults" and anchor apple
-    - identifier: com.apple.defaults
-    - identifier_type: bundleID
-    - authorization: Allow
+  - path: /usr/bin/defaults
+    csreq: identifier "com.apple.defaults" and anchor apple
+    identifier: com.apple.defaults
+    identifier_type: bundleID
+    authorization: Allow

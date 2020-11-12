@@ -1,6 +1,6 @@
 SystemPolicyAllFiles:
-  - /Applications/MySQLWorkbench.app:
-    - csreq: identifier "com.oracle.workbench.MySQLWorkbench" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VB5E2TV963
-    - identifier: com.oracle.workbench.MySQLWorkbench
-    - identifier_type: bundleID
-    - authorization: Allow
+  - path: /Applications/MySQLWorkbench.app
+    csreq: identifier "com.oracle.workbench.MySQLWorkbench" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VB5E2TV963
+    identifier: com.oracle.workbench.MySQLWorkbench
+    identifier_type: bundleID
+    authorization: Allow

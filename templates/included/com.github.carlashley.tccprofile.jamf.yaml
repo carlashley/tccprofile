@@ -1,11 +1,11 @@
 SystemPolicyAllFiles:
-  - /usr/local/jamf/bin/jamfAgent:
-    - csreq: identifier "com.jamfsoftware.jamfAgent" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"
-    - identifier: /usr/local/jamf/bin/jamfAgent
-    - identifier_type: path 
-    - authorization: Allow
-  - /usr/local/jamf/bin/jamf:
-    - csreq: identifier "com.jamfsoftware.jamf" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"
-    - identifier: /usr/local/jamf/bin/jamf
-    - identifier_type: path 
-    - authorization: Allow
+  - path: /usr/local/jamf/bin/jamfAgent
+    csreq: identifier "com.jamfsoftware.jamfAgent" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"
+    identifier: /usr/local/jamf/bin/jamfAgent
+    identifier_type: path 
+    authorization: Allow
+  - path: /usr/local/jamf/bin/jamf
+    csreq: identifier "com.jamfsoftware.jamf" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"
+    identifier: /usr/local/jamf/bin/jamf
+    identifier_type: path 
+    authorization: Allow
