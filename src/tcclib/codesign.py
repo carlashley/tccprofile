@@ -77,9 +77,19 @@ def detached_signature(path):
     return result
 
 
-def requirements(path, detached_sig=None):
+def requirements(path, detached_sig=None, apple_event=False):
     """Codesign."""
     result = dict()
+
+    # Change the dict keys if this is an AppleEvent style requirement
+    if apple_event:
+        _id_key = 'apple_events_identifier'
+        _id_type_key = 'apple_events_identifier_type'
+        _csreq_key = 'apple_events_csreq'
+    else:
+        _id_key = 'identifier'
+        _id_type_key = 'identifier_type'
+        _csreq_key = 'csreq'
 
     # Lines with useful output start with these strings
     _dsgn_prefix = 'designated => '
@@ -110,13 +120,13 @@ def requirements(path, detached_sig=None):
             if _dsgn_prefix in _line:
                 _res = _line.partition(_dsgn_prefix)
                 _res = _res[_res.index(_dsgn_prefix) + 1:][0]
-                result['csreq'] = _res
+                result[_csreq_key] = _res
 
         for _line in _e.splitlines():
             if _line.startswith(_idnt_prefix):
                 if _idnt_prefix in _line:
-                    result['identifier'] = _line.replace(_idnt_prefix, '')
-                    result['identifier_type'] = 'bundleID'
+                    result[_id_key] = _line.replace(_idnt_prefix, '')
+                    result[_id_type_key] = 'bundleID'
 
                     # Test to make sure that the bundle ID matches
                     # expected style of 'org.example.foo'. This is
@@ -124,13 +134,13 @@ def requirements(path, detached_sig=None):
                     # avoid scenarios like the 'python3' binary
                     # deep in the framework has an identifier value
                     # of 'python3'.
-                    if not re.match(_bnid_regex, result['identifier']):
-                        result['identifier'] = path
-                        result['identifier_type'] = 'path'
+                    if not re.match(_bnid_regex, result[_id_key]):
+                        result[_id_key] = path
+                        result[_id_type_key] = 'path'
     elif _p.returncode == 1 and 'not signed' in _e:
-        result['csreq'] = None
-        result['identifier'] = None
-        result['identifier_type'] = None
+        result[_csreq_key] = None
+        result[_id_key] = None
+        result[_id_type_key] = None
 
     result['is_signed'] = result.get('csreq', None) is not None
 

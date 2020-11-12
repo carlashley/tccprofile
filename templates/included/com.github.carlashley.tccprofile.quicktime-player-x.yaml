@@ -3,4 +3,4 @@ ScreenCapture:
     csreq: identifier "com.apple.QuickTimePlayerX" and anchor apple
     identifier: com.apple.QuickTimePlayerX
     identifier_type: bundleID
-    authorization: AllowStandardUserToSetSystemService
+    allowed: AllowStandardUserToSetSystemService

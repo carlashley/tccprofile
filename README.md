@@ -53,7 +53,12 @@ optional arguments:
   -v, --version         Display version number and license and exit.
 ```
 
-## Example
+## Scanning
+The `--scan` mode builds a list of installed applications as reported by `system_profiler`, as well as checking the `/System/Applications` and `/Applications` folders, and checks some common binary paths such as `/bin/`, `/usr/local/bin` and checks the code signature requirements for each item found.
+The TCC databases are then checked for entries that have a service type that corresponds to the PPPCP services, and then creates the relevant information required to create a profile for each of those items found in the TCC databases.
+If no code signature is found in the TCC database but the app is installed on the system, then the code signature requirements are used based on the information found from scanning for apps installed.
+
+## Examples
 ### List Services
 ```
 [jappleseed@infiniteloop]:tccprofile # ./tccprofile --list-services

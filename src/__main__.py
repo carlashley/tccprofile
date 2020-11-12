@@ -1,4 +1,5 @@
 """Main"""
+from pprint import pprint
 
 try:
     from tcclib import common
@@ -6,6 +7,7 @@ try:
     from tcclib import payloadobj
     from tcclib import plist
     from tcclib import tccdbscan
+    from tcclib import templates
     from tcclib import vers
 except ImportError:
     from .tcclib import common
@@ -13,10 +15,13 @@ except ImportError:
     from .tcclib import payloadobj
     from .tcclib import plist
     from .tcclib import tccdbscan
+    from .tcclib import templates
     from .tcclib import vers
 
 
 def main():
+    _services = None
+    profile = None
     args = menumaker.arg_parser()
 
     # Version compatibility check - makes sure python
@@ -55,21 +60,44 @@ def main():
         else:
             _services = tccdbscan.user_managed()
 
-        # No services == no profile.
-        if not _services:
-            common.errmsg('No matching services found. List available services with \'--list-services\' argument. Exiting.')
+    if args.template:
+        _available_templates = templates.available()
+        _services = dict()
 
-        if _kwargs:
-            _payload_content = payloadobj.PayloadContentDict(_services, **_kwargs).payload_content
-            profile = payloadobj.ProfileDict(_payload_content, **_kwargs).payload
-        else:
-            _payload_content = payloadobj.PayloadContentDict(_services).payload_content
-            profile = payloadobj.ProfileDict(_payload_content).payload
+        # Iterate over each template and all services+apps to merge into one profile
+        # if more than one template is supplied
+        for _tmplate in args.template:
+            if _tmplate in _available_templates:
+                try:
+                    _f = _available_templates[_tmplate]
+                    _tmplate_services = templates.services(_f)
 
-    if not args.output:
-        plist.writePlist(values=profile, stdout=True)
-    elif args.output:
-        plist.writePlist(values=profile, f=args.output[0])
+                    for _svc, _apps in _tmplate_services.items():
+                        for _a in _apps:
+                            try:
+                                _services[_svc].append(_a)
+                            except KeyError:
+                                _services[_svc] = list()
+                                _services[_svc].append(_a)
+                except KeyError:
+                    pass
+
+    # No services == no profile.
+    if not _services:
+        common.errmsg('No matching services found. List available services with \'--list-services\' argument. Exiting.')
+
+    if _kwargs:
+        _payload_content = payloadobj.PayloadContentDict(_services, **_kwargs).payload_content
+        profile = payloadobj.ProfileDict(_payload_content, **_kwargs).payload
+    else:
+        _payload_content = payloadobj.PayloadContentDict(_services).payload_content
+        profile = payloadobj.ProfileDict(_payload_content).payload
+
+    if profile:
+        if not args.output:
+            plist.writePlist(values=profile, stdout=True)
+        elif args.output:
+            plist.writePlist(values=profile, f=args.output[0])
 
 
 if __name__ == '__main__':

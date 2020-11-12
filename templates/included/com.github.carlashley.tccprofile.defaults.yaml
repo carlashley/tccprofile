@@ -3,4 +3,4 @@ SystemPolicyAllFiles:
     csreq: identifier "com.apple.defaults" and anchor apple
     identifier: com.apple.defaults
     identifier_type: bundleID
-    authorization: Allow
+    allowed: Allow

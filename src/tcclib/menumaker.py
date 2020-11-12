@@ -7,6 +7,7 @@ from sys import argv, exit
 
 from .common import errmsg
 from .conf import KTCC_MAP
+from .templates import available as available_templates
 from .vers import VERSION_STR
 
 
@@ -19,6 +20,14 @@ def arg_parser():
                                  'dest': 'scan',
                                  'required': False,
                                  'help': ('Scan the TCC configuration (system and current user) on this device.')}},
+             'template': {'args': ['-t', '--template'],
+                          'kwargs': {'nargs': '*',
+                                     'type': str,
+                                     'dest': 'template',
+                                     'metavar': '[template]',
+                                     'required': False,
+                                     'choices': sorted([_k for _k, _v in available_templates().items()]),
+                                     'help': ('Specify a template to generate a profile from.')}},
              'output': {'args': ['-o', '--output'],
                         'kwargs': {'nargs': 1,
                                    'type': str,

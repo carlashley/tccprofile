@@ -31,6 +31,9 @@ KTCC_ALLOW_STD_USER_PAYLOADS = ['ListenEvent', 'ScreenCapture']
 # These payloads can only be set to 'Deny'.
 KTCC_DENY_ONLY_PAYLOADS = ['Camera', 'Microphone']
 
+# Allow only payloads
+KTCC_ALLOW_ONLY_PAYLOADS = [_v for _k, _v in KTCC_MAP.items() if _v not in KTCC_ALLOW_STD_USER_PAYLOADS + KTCC_DENY_ONLY_PAYLOADS]
+
 # From macOS 11+ the 'Allowed = True/False' payload key has been deprecated
 # in favour of the 'Authorization = Allow/Deny/AllowStandardUserToSetSystemService'
 # values.

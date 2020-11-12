@@ -92,7 +92,7 @@ class PayloadContentDict:
 
 class ProfileDict:
     _UUID = str(uuid1()).upper()
-    _REQ_ATTRS = {'PayloadDescription': 'PPPCP Profile generated from the System and Current user TCC databases.',
+    _REQ_ATTRS = {'PayloadDescription': 'PPPCP Profile generated from TCC databases or templates.',
                   'PayloadDisplayName': 'PPPCP Profile Generated {}'.format(_NOW),
                   'PayloadIdentifier': 'com.github.carlashley.tccprofile',
                   'PayloadOrganization': 'com.github.carlashley.tccprofile',

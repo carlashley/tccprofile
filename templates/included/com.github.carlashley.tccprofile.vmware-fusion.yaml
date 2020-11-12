@@ -3,26 +3,26 @@ Accessibility:
     csreq: identifier "com.vmware.fusion" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = EG7KH642X6
     identifier: com.vmware.fusion
     identifier_type: bundleID
-    authorization: Allow
+    allowed: Allow
 AppleEvents:
   - path: /Applications/VMware Fusion.app/Contents/Library/VMware Fusion Applications Menu.app
     csreq: identifier "com.vmware.fusionApplicationsMenu" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = EG7KH642X6
     identifier: com.vmware.fusionApplicationsMenu
     identifier_type: bundleID
-    authorization: Allow
+    allowed: Allow
     receiver_path: /System/Library/CoreServices/System Events.app
-      - apple_events_csreq: identifier "com.apple.systemevents" and anchor apple
-      - apple_events_identifier: com.apple.systemevents
-      - apple_events_identifier_type: bundleID
+    apple_events_csreq: identifier "com.apple.systemevents" and anchor apple
+    apple_events_identifier: com.apple.systemevents
+    apple_events_identifier_type: bundleID
 SystemPolicyAllFiles:
   - path: /Applications/VMware Fusion.app
     csreq: identifier "com.vmware.fusion" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = EG7KH642X6
     identifier: com.vmware.fusion
     identifier_type: bundleID
-    authorization: Allow
+    allowed: Allow
 ScreenCapture:
   - path: /Applications/VMware Fusion.app
     csreq: identifier "com.vmware.fusion" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = EG7KH642X6
     identifier: com.vmware.fusion
     identifier_type: bundleID
-    authorization: AllowStandardUserToSetSystemService
+    allowed: AllowStandardUserToSetSystemService
