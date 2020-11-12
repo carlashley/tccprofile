@@ -13,7 +13,7 @@ def _xxd(blob):
     result = None
 
     # Note, this requires input passed in via 'stdin', so include 'stdin' for piping input.
-    _cmd = ['/usr/local/bin/xxd', '-r', '-p']
+    _cmd = ['/usr/bin/xxd', '-r', '-p']
     _p = subprocess.Popen(_cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     _p.stdin.write(blob)
     _r, _e = _p.communicate()
