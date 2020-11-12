@@ -1,6 +1,4 @@
 """Main"""
-from pprint import pprint
-
 try:
     from tcclib import common
     from tcclib import menumaker

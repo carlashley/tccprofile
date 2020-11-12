@@ -1,5 +1,4 @@
 from pathlib import Path, PurePath
-from pprint import pprint
 
 from .common import errmsg
 from .conf import KTCC_ALLOW_STD_USER_PAYLOADS, KTCC_ALLOW_ONLY_PAYLOADS
