@@ -107,13 +107,13 @@ def arg_parser():
         _parser.print_usage()
         errmsg('{}: error: argument --list-services: can only be used on its own'.format(_name))
 
-    if not result.scan and (result.services or result.profile_removable or
-                            result.payload_org or result.payload_identifier or
-                            result.payload_disp_name or result.payload_desc or
-                            result.output):
+    if not (result.scan or result.template) and (result.services or result.profile_removable or
+                                                 result.payload_org or result.payload_identifier or
+                                                 result.payload_disp_name or result.payload_desc or
+                                                 result.output):
         _name = PurePath(argv[0]).name
 
         _parser.print_usage()
-        errmsg('{}: error: argument --scan: is required.'.format(_name))
+        errmsg('{}: error: argument --scan or -t/--template: is required.'.format(_name))
 
     return result
