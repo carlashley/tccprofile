@@ -113,6 +113,104 @@ ScreenCapture:
 
 ```
 
+## Generating a profile based on templates
+Generating a profile based on a template (or multiple templates) is done with the `-t/--template` arguments, then specifying the basic app name (the basename of the template without the file extension) as the template to use.
+
+### Google Chrome and Discord (to file)
+```
+[jappleseed@infiniteloop]:tccprofile # ./tccprofile -t google-chrome discord -o googlediscord.mobileconfig
+[jappleseed@infiniteloop]:tccprofile # ls -lha
+total 168
+drwxr-xr-x  13 jappleseed  staff   442B 12 Nov 21:05 .
+drwxr-xr-x  11 jappleseed  staff   374B  7 Nov 14:00 ..
+drwxr-xr-x  13 jappleseed  staff   442B 12 Nov 20:58 .git
+-rw-r--r--   1 jappleseed  staff   1.8K  8 Nov 21:36 .gitignore
+-rw-r--r--   1 jappleseed  staff    11K  1 Nov 20:47 LICENSE
+-rw-r--r--   1 jappleseed  staff    16K 12 Nov 21:02 README.md
+-rwxr-xr-x   1 jappleseed  staff   993B  1 Nov 20:47 build.sh
+-rw-r--r--   1 jappleseed  staff   4.2K 12 Nov 21:05 googlediscord.mobileconfig
+drwxr-xr-x   5 jappleseed  staff   170B 12 Nov 20:39 src
+-rwxr-xr-x   1 jappleseed  staff    32K 12 Nov 20:43 tccprofile
+drwxr-xr-x   4 jappleseed  staff   136B  8 Nov 17:43 templates
+```
+
+### Google Chrome (to standard out)
+```
+[jappleseed@infiniteloop]:tccprofile # ./tccprofile -t google-chrome
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadDescription</key>
+			<string>PPPCP profile</string>
+			<key>PayloadDisplayName</key>
+			<string>PPPCP profile</string>
+			<key>PayloadIdentifier</key>
+			<string>com.github.carlashley.tccprofile.8184B1CE-24D6-11EB-BCC4-ACDE48001122</string>
+			<key>PayloadOrganization</key>
+			<string>com.github.carlashley.tccprofile</string>
+			<key>PayloadType</key>
+			<string>com.apple.TCC.configuration-profile-policy</string>
+			<key>PayloadUUID</key>
+			<string>8184B1CE-24D6-11EB-BCC4-ACDE48001122</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>Services</key>
+			<dict>
+				<key>ScreenCapture</key>
+				<array>
+					<dict>
+						<key>Authorization</key>
+						<string>AllowStandardUserToSetSystemService</string>
+						<key>CodeRequirement</key>
+						<string>(identifier "com.google.Chrome" or identifier "com.google.Chrome.beta" or identifier "com.google.Chrome.dev" or identifier "com.google.Chrome.canary") and certificate leaf = H"c9a99324ca3fcb23dbcc36bd5fd4f9753305130a"</string>
+						<key>Identifier</key>
+						<string>com.google.Chrome</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+				<key>SystemPolicyAllFiles</key>
+				<array>
+					<dict>
+						<key>Authorization</key>
+						<string>Allow</string>
+						<key>CodeRequirement</key>
+						<string>(identifier "com.google.Chrome" or identifier "com.google.Chrome.beta" or identifier "com.google.Chrome.dev" or identifier "com.google.Chrome.canary") and certificate leaf = H"c9a99324ca3fcb23dbcc36bd5fd4f9753305130a"</string>
+						<key>Identifier</key>
+						<string>com.google.Chrome</string>
+						<key>IdentifierType</key>
+						<string>bundleID</string>
+					</dict>
+				</array>
+			</dict>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>PPPCP Profile generated from TCC databases or templates.</string>
+	<key>PayloadDisplayName</key>
+	<string>PPPCP Profile Generated 2020-11-12-210207</string>
+	<key>PayloadIdentifier</key>
+	<string>com.github.carlashley.tccprofile</string>
+	<key>PayloadOrganization</key>
+	<string>com.github.carlashley.tccprofile</string>
+	<key>PayloadRemovalDisallowed</key>
+	<true/>
+	<key>PayloadScope</key>
+	<string>system</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>8184B412-24D6-11EB-BCC4-ACDE48001122</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>
+```
+
 ## Scanning
 The `--scan` mode builds a list of installed applications as reported by `system_profiler`, as well as checking the `/System/Applications` and `/Applications` folders, and checks some common binary paths such as `/bin/`, `/usr/local/bin` and checks the code signature requirements for each item found.
 This particular process can take several minutes to run.
