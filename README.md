@@ -22,7 +22,8 @@ To properly scan the TCC databases, full disk access may need to be provided to 
 
 ```
 [jappleseed@infiniteloop]:tccprofile # ./tccprofile -h
-usage: tccprofile [-h] [--scan] [-o [path]] [--description [description]]
+usage: tccprofile [-h] [--scan] [-t [[template] [[template] ...]]] [-o [path]]
+                  [--description [description]]
                   [--display-name [display-name]] [--identifier [identifier]]
                   [--organization [organization]] [--remove-profile]
                   [--services [services] [[services] ...]] [--list-services]
@@ -32,6 +33,8 @@ optional arguments:
   -h, --help            show this help message and exit
   --scan                Scan the TCC configuration (system and current user)
                         on this device.
+  -t [[template] [[template] ...]], --template [[template] [[template] ...]]
+                        Specify a template to generate a profile from.
   -o [path], --output [path]
                         Save mobileconfig profile to specified path.
   --description [description]
@@ -53,10 +56,71 @@ optional arguments:
   -v, --version         Display version number and license and exit.
 ```
 
+## Templates
+The `-t/--template` argument takes a template name (the basename of files in the `templates/included` or `templates/overrides` folder minus the file extension) and uses the template to generate a PPPCP profile.
+
+If the application/binary path specified in the `path` and/or `receiver_path` keys is present on the system, then the codesign requirements will be generated from that path.
+If either of the path values for these keys are not present, then it falls back to using the supplied codesign requirements specified in the template.
+
+To override any included template, simply copy the template from `templates/included` and place it in `templates/overrides` and update the values for the keys you want to override.
+
+Each template file must be prefixed with 'com.github.carlashley.tccprofile.' and it is recommended to use the application/binary name and `.yaml` (for example `vmware-fusion.yaml`) for the suffix and extension.
+
+Each template file must consist of these `key: value` pairs:
+```
+ServiceName:
+ - path: /Application/Path
+   csreq: [output from codesign -dr - /Application/Path]
+   identifier: [identifier value]
+   identifier_type: [path or bundleID]
+   allowed: [Allow/Deny/AllowStandardUserToSetSystemService]
+   receiver_path: [AppleEvents receiver app path]
+   apple_events_csreq: [output from codesign -dr - /Applications/Path for the AppleEvents receiver app]
+   apple_events_identifier: [AppleEvents receiver app identifier value]
+   apple_events_identifier_type: [path or bundleID]
+```
+
+### Example template
+```
+Accessibility:
+  - path: /Applications/VMware Fusion.app
+    csreq: identifier "com.vmware.fusion" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = EG7KH642X6
+    identifier: com.vmware.fusion
+    identifier_type: bundleID
+    allowed: Allow
+AppleEvents:
+  - path: /Applications/VMware Fusion.app/Contents/Library/VMware Fusion Applications Menu.app
+    csreq: identifier "com.vmware.fusionApplicationsMenu" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = EG7KH642X6
+    identifier: com.vmware.fusionApplicationsMenu
+    identifier_type: bundleID
+    allowed: Allow
+    receiver_path: /System/Library/CoreServices/System Events.app
+    apple_events_csreq: identifier "com.apple.systemevents" and anchor apple
+    apple_events_identifier: com.apple.systemevents
+    apple_events_identifier_type: bundleID
+SystemPolicyAllFiles:
+  - path: /Applications/VMware Fusion.app
+    csreq: identifier "com.vmware.fusion" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = EG7KH642X6
+    identifier: com.vmware.fusion
+    identifier_type: bundleID
+    allowed: Allow
+ScreenCapture:
+  - path: /Applications/VMware Fusion.app
+    csreq: identifier "com.vmware.fusion" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = EG7KH642X6
+    identifier: com.vmware.fusion
+    identifier_type: bundleID
+    allowed: AllowStandardUserToSetSystemService
+
+```
+
 ## Scanning
 The `--scan` mode builds a list of installed applications as reported by `system_profiler`, as well as checking the `/System/Applications` and `/Applications` folders, and checks some common binary paths such as `/bin/`, `/usr/local/bin` and checks the code signature requirements for each item found.
+This particular process can take several minutes to run.
+
 The TCC databases are then checked for entries that have a service type that corresponds to the PPPCP services, and then creates the relevant information required to create a profile for each of those items found in the TCC databases.
+
 If no code signature is found in the TCC database but the app is installed on the system, then the code signature requirements are used based on the information found from scanning for apps installed.
+
 
 ## Examples
 ### List Services
