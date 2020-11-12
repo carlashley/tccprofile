@@ -10,7 +10,7 @@ AppleEvents:
     identifier: com.vmware.fusionApplicationsMenu
     identifier_type: bundleID
     authorization: Allow
-    receiver_path: /System/Library/CoreServices/System Events.app:
+    receiver_path: /System/Library/CoreServices/System Events.app
       - apple_events_csreq: identifier "com.apple.systemevents" and anchor apple
       - apple_events_identifier: com.apple.systemevents
       - apple_events_identifier_type: bundleID
