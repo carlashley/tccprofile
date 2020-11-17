@@ -1,0 +1,6 @@
+SystemPolicyAllFiles:
+  - path: /usr/sbin/sshd
+    csreq: identifier "com.apple.sshd" and anchor apple
+    identifier: com.apple.sshd
+    identifier_type: bundleID
+    allowed: Allow
