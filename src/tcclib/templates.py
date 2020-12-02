@@ -6,7 +6,7 @@ from .codesign import requirements
 from .payloadobj import ServicesDict
 
 try:
-    import yaml
+    from .tpm import yaml
 except ImportError:
     errmsg('PyYaml required. Please use \'pip3 install pyyaml\' to install.')
 
