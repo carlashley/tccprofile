@@ -9,3 +9,85 @@ SystemPolicyAllFiles:
     identifier: /usr/local/jamf/bin/jamf
     identifier_type: path 
     allowed: Allow
+AppleEvents:
+  - path: /Library/Application Support/JAMF/Jamf.app
+    csreq: identifier "com.jamf.management.Jamf" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"
+    identifier: com.jamf.management.Jamf
+    identifier_type: bundleID
+    allowed: Allow
+    receiver_path: /System/Library/CoreServices/System Events.app
+    apple_events_csreq: identifier "com.apple.systemevents" and anchor apple
+    apple_events_identifier: com.apple.systemevents
+    apple_events_identifier_type: bundleID
+  - path: /usr/local/jamf/bin/jamfAgent
+    csreq: identifier "com.jamfsoftware.jamfAgent" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"
+    identifier: /usr/local/jamf/bin/jamfAgent
+    identifier_type: path
+    allowed: Allow
+    receiver_path: /System/Library/CoreServices/System Events.app
+    apple_events_csreq: identifier "com.apple.systemevents" and anchor apple
+    apple_events_identifier: com.apple.systemevents
+    apple_events_identifier_type: bundleID
+  - path: /usr/local/jamf/bin/jamf
+    csreq: identifier "com.jamfsoftware.jamf" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"
+    identifier: /usr/local/jamf/bin/jamf
+    identifier_type: path
+    allowed: Allow
+    receiver_path: /System/Library/CoreServices/System Events.app
+    apple_events_csreq: identifier "com.apple.systemevents" and anchor apple
+    apple_events_identifier: com.apple.systemevents
+    apple_events_identifier_type: bundleID
+  - path: /Library/Application Support/JAMF/Jamf.app
+    csreq: identifier "com.jamf.management.Jamf" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"
+    identifier: com.jamf.management.Jamf
+    identifier_type: bundleID
+    allowed: Allow
+    receiver_path: /System/Library/CoreServices/SystemUIServer.app
+    apple_events_csreq: identifier "com.apple.systemuiserver" and anchor apple
+    apple_events_identifier: com.apple.systemuiserver
+    apple_events_identifier_type: bundleID
+  - path: /usr/local/jamf/bin/jamfAgent
+    csreq: identifier "com.jamfsoftware.jamfAgent" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"
+    identifier: /usr/local/jamf/bin/jamfAgent
+    identifier_type: path
+    allowed: Allow
+    receiver_path: /System/Library/CoreServices/SystemUIServer.app
+    apple_events_csreq: identifier "com.apple.systemuiserver" and anchor apple
+    apple_events_identifier: com.apple.systemuiserver
+    apple_events_identifier_type: bundleID
+  - path: /usr/local/jamf/bin/jamf
+    csreq: identifier "com.jamfsoftware.jamf" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"
+    identifier: /usr/local/jamf/bin/jamf
+    identifier_type: path
+    allowed: Allow
+    receiver_path: /System/Library/CoreServices/SystemUIServer.app
+    apple_events_csreq: identifier "com.apple.systemuiserver" and anchor apple
+    apple_events_identifier: com.apple.systemuiserver
+    apple_events_identifier_type: bundleID
+  - path: /Library/Application Support/JAMF/Jamf.app
+    csreq: identifier "com.jamf.management.Jamf" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"
+    identifier: com.jamf.management.Jamf
+    identifier_type: bundleID
+    allowed: Allow
+    receiver_path: /System/Library/CoreServices/Finder.app
+    apple_events_csreq: identifier "com.apple.finder" and anchor apple
+    apple_events_identifier: com.apple.finder
+    apple_events_identifier_type: bundleID
+  - path: /usr/local/jamf/bin/jamfAgent
+    csreq: identifier "com.jamfsoftware.jamfAgent" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"
+    identifier: /usr/local/jamf/bin/jamfAgent
+    identifier_type: path
+    allowed: Allow
+    receiver_path: /System/Library/CoreServices/Finder.app
+    apple_events_csreq: identifier "com.apple.finder" and anchor apple
+    apple_events_identifier: com.apple.finder
+    apple_events_identifier_type: bundleID
+  - path: /usr/local/jamf/bin/jamf
+    csreq: identifier "com.jamfsoftware.jamf" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443"
+    identifier: /usr/local/jamf/bin/jamf
+    identifier_type: path
+    allowed: Allow
+    receiver_path: /System/Library/CoreServices/Finder.app
+    apple_events_csreq: identifier "com.apple.finder" and anchor apple
+    apple_events_identifier: com.apple.finder
+    apple_events_identifier_type: bundleID
