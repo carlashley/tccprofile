@@ -3,7 +3,7 @@
 from datetime import datetime
 
 from .codesign import csreq
-from .conf import KTCC_MAP, KTCC_ALLOW_STD_USER_PAYLOADS
+from .conf import BIG_SUR_VER, KTCC_MAP, KTCC_ALLOW_STD_USER_PAYLOADS, MAC_OS_VER
 
 
 class TCCApplication:
@@ -49,6 +49,10 @@ class TCCApplication:
 
 class TCCDBEntry:
     """TCC Database object."""
+    # NOTE: Changes to the TCC.db in Big Sur drops the 'prompt_count' field,
+    #       so this has been removed as a required attribute.
+    #       The 'allowed' field also changed in Big Sur to 'auth_value' so
+    #       this is remapped to 'allowed' in the 'sqlitedb' class.
     _ATTRS = ['allowed',
               'identifier',
               'identifier_type',
@@ -59,7 +63,6 @@ class TCCDBEntry:
               'apple_events_identifier_type',
               'last_modified',
               'policy_id',
-              'prompt_count',
               'service']
 
     def __init__(self, **kwargs):
@@ -86,10 +89,15 @@ class TCCDBEntry:
             # NOTE:In the SQL, the 'allowed' value of '1' represents
             # the entry is enabled, while '0' indicates not allowed.
             if _k == 'allowed':
+                if MAC_OS_VER < BIG_SUR_VER:
+                    _allow_value = 1
+                elif MAC_OS_VER >= BIG_SUR_VER:
+                    _allow_value = 2
+
                 if _tcc_service_type and _tcc_service_type in KTCC_ALLOW_STD_USER_PAYLOADS:
-                    _v = 'AllowStandardUserToSetSystemService' if _v == 1 else 'Deny'
+                    _v = 'AllowStandardUserToSetSystemService' if _v == _allow_value else 'Deny'
                 elif _tcc_service_type and _tcc_service_type not in KTCC_ALLOW_STD_USER_PAYLOADS:
-                    _v = 'Allow' if _v == 1 else 'Deny'
+                    _v = 'Allow' if _v == _allow_value else 'Deny'
 
             # NOTE: In the SQL, the 'last_modified' value is an 'epoch'
             # time entry.
