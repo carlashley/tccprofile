@@ -6,7 +6,7 @@ from sys import argv, version_info
 from .common import errmsg
 
 NAME = PurePath(argv[0]).name
-VER = '1.0.1.202011130750'
+VER = '1.0.1.202012021245'
 VERSION_STR = '{} version {} - Apache License Version 2.0'.format(NAME, VER)
 
 
