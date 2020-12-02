@@ -22,7 +22,8 @@ class SQLiteDB:
                 'client_type': 'identifier_type',
                 'indirect_object_identifier': 'apple_events_identifier',
                 'indirect_object_identifier_type': 'apple_events_identifier_type',
-                'indirect_object_code_identity': 'apple_events_csreq'}
+                'indirect_object_code_identity': 'apple_events_csreq',
+                'auth_value': 'allowed'}  # New in macOS Big Sur. Replaces 'allowed'.
 
     def __init__(self, db):
         self._db = db
