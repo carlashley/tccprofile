@@ -1,4 +1,10 @@
 """Configuration basics."""
+from distutils.version import StrictVersion
+
+from .common import sw_ver
+
+# Big Sur version
+BIG_SUR_VER = StrictVersion('11.0')
 
 # This is a translation of what Apple generally uses when referring to a specifc TCC component,
 # to what the PPPCP Payload keys are generally called.
@@ -37,3 +43,4 @@ KTCC_ALLOW_ONLY_PAYLOADS = [_v for _k, _v in KTCC_MAP.items() if _v not in KTCC_
 # From macOS 11+ the 'Allowed = True/False' payload key has been deprecated
 # in favour of the 'Authorization = Allow/Deny/AllowStandardUserToSetSystemService'
 # values.
+MAC_OS_VER = sw_ver().product_version
