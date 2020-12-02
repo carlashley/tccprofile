@@ -3,6 +3,9 @@
 ._*
 *.mobileconfig
 
+# Third party modules
+src/tcclib/tpm
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
