@@ -1,0 +1,6 @@
+PostEvent:
+  - path: /System/Library/CoreServices/RemoteManagement/ScreensharingAgent.bundle/Contents/MacOS/ScreensharingAgent
+    csreq: identifier "com.apple.screensharing.agent" and anchor apple
+    identifier: com.apple.screensharing.agent
+    identifier_type: bundleID
+    allowed: Allow
