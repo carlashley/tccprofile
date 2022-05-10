@@ -1,3 +1,12 @@
+# 2022-05-10
+For several personal and private reasons, I will no longer be able to actively maintain this repo.
+
+If anyone would like to fork it off and take over active maintenance/create a new tool in Swift, please feel free to do so.
+
+This repo will be marked read only from now on. No further support will be available.
+
+Carl.
+
 # tccprofile
 Scan the TCC databases and generate a PPPCP profile.
 
